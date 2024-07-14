@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Grid</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        .content {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .grid-container {
+            display: grid;
+            gap: 10px;
+            width: 100%;
+            max-width: 1200px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+        .grid-item {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Brands to Boycott for Palestine</h1>
+        <p>Below is a list of recommended brands to boycott.</p>
+        <p>This list is not comprehensive, but we continue to keep adding more. We also recommend users try the No Thanks boycott app to identify products they use regularly that should be avoided.</p>
+    </div>
+    <div class="grid-container">
+        <!-- Repeat these divs as needed for the m x n grid -->
+        <div class="grid-item"><img src="1.png" alt="Image 1"></div>
+        <div class="grid-item"><img src="2.png" alt="Image 2"></div>
+        <div class="grid-item"><img src="3.png" alt="Image 3"></div>
+        <div class="grid-item"><img src="4.png" alt="Image 4"></div>
+        <div class="grid-item"><img src="5.png" alt="Image 5"></div>
+        <div class="grid-item"><img src="6.png" alt="Image 6"></div>
+        <div class="grid-item"><img src="7.png" alt="Image 7"></div>
+        <div class="grid-item"><img src="8.png" alt="Image 8"></div>
+        <div class="grid-item"><img src="9.png" alt="Image 9"></div>
+        <div class="grid-item"><img src="10.png" alt="Image 10"></div>
+        <div class="grid-item"><img src="11.png" alt="Image 11"></div>
+        <div class="grid-item"><img src="12.png" alt="Image 12"></div>
+        <div class="grid-item"><img src="13.png" alt="Image 13"></div>
+        <div class="grid-item"><img src="14.png" alt="Image 14"></div>
+        <div class="grid-item"><img src="15.png" alt="Image 15"></div>
+        <!-- Add more images as needed -->
+    </div>
+</body>
+</html>
