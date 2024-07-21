@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #50b3a2;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+        #showcase {
+            min-height: 400px;
+            background: url('scanner.jpg') no-repeat 0 -400px;
+            text-align: center;
+            color: #fff;
+        }
+        #showcase h1 {
+            margin-top: 100px;
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+        #showcase p {
+            font-size: 20px;
+        }
+        #features {
+            margin: 20px 0;
+        }
+        #features .box {
+            float: left;
+            width: 30%;
+            padding: 10px;
+            text-align: center;
+        }
+        #contact {
+            padding: 30px;
+            background: #333;
+            color: #fff;
+        }
+        #contact form {
+            display: flex;
+            flex-direction: column;
+        }
+        #contact input, #contact textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        #scanner-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        #interactive {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>Barcode Scanner</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#showcase">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="showcase">
+        <div class="container">
+            <h1>Welcome to Barcode Scanner</h1>
+            <p>Your ultimate solution for efficient and reliable barcode scanning.</p>
+        </div>
+    </section>
+
+    <section id="features" class="container">
+        <h2>Features</h2>
+        <div class="box">
+            <h3>Fast Scanning</h3>
+            <p>Quick and accurate barcode reading for enhanced productivity.</p>
+        </div>
+        <div class="box">
+            <h3>High Compatibility</h3>
+            <p>Works seamlessly with various devices and operating systems.</p>
+        </div>
+        <div class="box">
+            <h3>User-Friendly</h3>
+            <p>Easy to use with an intuitive interface.</p>
+        </div>
+    </section>
+
+    <section id="scanner-container" class="container">
+        <h2>Barcode Scanner</h2>
+        <div id="interactive" class="viewport"></div>
+        <p id="result">Scanned Code: <span id="scanned-result"></span></p>
+        <button onclick="startScanner()">Start Scanner</button>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form action="mailto:example@example.com" method="post" enctype="text/plain">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <script>
+        function startScanner() {
+            Quagga.init({
+                inputStream : {
+                    name : "Live",
+                    type : "LiveStream",
+                    target: document.querySelector('#interactive')    // Or '#yourElement' (optional)
+                },
+                decoder : {
+                    readers : ["code_128_reader"] // List of barcode formats to support
+                }
+            }, function(err) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                console.log("Initialization finished. Ready to start");
+                Quagga.start();
+            });
+
+            Quagga.onDetected(function(data) {
+                var code = data.codeResult.code;
+                document.getElementById('scanned-result').innerText = code;
+                Quagga.stop();
+            });
+        }
+    </script>
+</body>
+</html>
