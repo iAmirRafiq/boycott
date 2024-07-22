@@ -92,6 +92,10 @@
             max-width: 600px;
             height: 400px;
             margin: 0 auto;
+            border: 1px solid #ccc;
+        }
+        #product-info {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -139,6 +143,12 @@
         <div id="interactive" class="viewport"></div>
         <p id="result">Scanned Code: <span id="scanned-result"></span></p>
         <button onclick="startScanner()">Start Scanner</button>
+        <div id="product-info">
+            <h3>Product Information</h3>
+            <p id="product-name">Name: <span id="name"></span></p>
+            <p id="product-description">Description: <span id="description"></span></p>
+            <p id="product-price">Price: <span id="price"></span></p>
+        </div>
     </section>
 
     <section id="contact">
@@ -157,13 +167,13 @@
     <script>
         function startScanner() {
             Quagga.init({
-                inputStream : {
-                    name : "Live",
-                    type : "LiveStream",
-                    target: document.querySelector('#interactive')    // Or '#yourElement' (optional)
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector('#interactive') // Or '#yourElement' (optional)
                 },
-                decoder : {
-                    readers : ["code_128_reader"] // List of barcode formats to support
+                decoder: {
+                    readers: ["code_128_reader"] // List of barcode formats to support
                 }
             }, function(err) {
                 if (err) {
@@ -177,8 +187,29 @@
             Quagga.onDetected(function(data) {
                 var code = data.codeResult.code;
                 document.getElementById('scanned-result').innerText = code;
+                fetchProductInfo(code);
                 Quagga.stop();
             });
+        }
+
+        function fetchProductInfo(barcode) {
+            // Replace with your actual API endpoint
+            const apiUrl = `https://api.example.com/products/${barcode}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Assuming the API returns an object with these fields
+                    document.getElementById('name').innerText = data.name || 'Not available';
+                    document.getElementById('description').innerText = data.description || 'Not available';
+                    document.getElementById('price').innerText = data.price ? `$${data.price}` : 'Not available';
+                })
+                .catch(error => {
+                    console.error('Error fetching product information:', error);
+                    document.getElementById('name').innerText = 'Error fetching data';
+                    document.getElementById('description').innerText = 'Error fetching data';
+                    document.getElementById('price').innerText = 'Error fetching data';
+                });
         }
     </script>
 </body>

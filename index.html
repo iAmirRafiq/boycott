@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Grid with Barcode Scanner</title>
+    <title>Image Grid</title>
     <style>
         body {
             display: flex;
@@ -50,39 +50,19 @@
             border-radius: 5px;
             font-size: 16px;
         }
-        #scanner {
-            width: 100%;
-            max-width: 600px;
-            display: none;
-            margin-bottom: 20px;
-        }
-        #startScanner {
-            padding: 10px 20px;
-            margin-bottom: 20px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
     </style>
 </head>
 <body>
     <div class="content">
         <h1>Brands to Boycott for Palestine</h1>
         <p>Below is a list of recommended brands to boycott.</p>
-        <p>This list is not comprehensive, but we continue to keep adding more. We also recommend users try the No Thanks boycott app to identify products they use regularly that should be avoided.</p>
+        <p>This list is not comprehensive, but we continue to keep adding more. </p>
         <input type="text" id="searchBar" placeholder="Search for a brand...">
-        <button id="startScanner">Start Barcode Scanner</button>
-        <div id="scanner"></div>
     </div>
     <div class="grid-container" id="imageGrid">
         <!-- Grid items will be added here dynamically -->
     </div>
 
-    <!-- Include QuaggaJS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
     <script>
         // Replace this list with your actual list of image filenames
         const imageFilenames = ['palestine_boycott_7up.png', 'palestine_boycott_Acqua_Panna.png', 'palestine_boycott_Acuvue_Contact_Lenses.png', 'palestine_boycott_AERIN_Beauty.png', 'palestine_boycott_Aero.png', 'palestine_boycott_Ahava__Dead_Sea__Laboratories.png', 'palestine_boycott_Airbnb.png', 'palestine_boycott_Alpo.png', 'palestine_boycott_Always.png', 'palestine_boycott_Ambipur.png', 'palestine_boycott_American_Eagle.png', 'palestine_boycott_Antica_Gelateria_Del_Corso.png', 'palestine_boycott_Aquafina.png', 'palestine_boycott_Aquarius.png', 'palestine_boycott_Aramis.png', 'palestine_boycott_Ariel.png', 'palestine_boycott_Audi.png', 'palestine_boycott_Aussie.png', 'palestine_boycott_Aveda.png', 'palestine_boycott_Aveeno.png', 'palestine_boycott_AXA.png', 'palestine_boycott_Axe.png', 'palestine_boycott_Baci_Perugina.png', 'palestine_boycott_Bakers.png', 'palestine_boycott_Band-Aid.png', 'palestine_boycott_Bank_of_America.png', 'palestine_boycott_Bank_of_Montreal.png', 'palestine_boycott_Barclays.png', "palestine_boycott_Beggin'.png", 'palestine_boycott_Benadryl.png', 'palestine_boycott_Benecol.png', 'palestine_boycott_Beneful.png', 'palestine_boycott_Bengay.png', 'palestine_boycott_Beyond.png', 'palestine_boycott_Biotherm.png', 'palestine_boycott_Blue_Bottle_Coffee.png', 'palestine_boycott_BMW.png', 'palestine_boycott_Bobbi_Brown.png', 'palestine_boycott_Boost.png', 'palestine_boycott_Bounce.png', 'palestine_boycott_Bounty.png', 'palestine_boycott_BP_(British_Petroleum).png', 'palestine_boycott_Braun.png', 'palestine_boycott_Buitoni.png', 'palestine_boycott_Bumble_and_Bumble.png', 'palestine_boycott_Burger_King.png', 'palestine_boycott_Busy_Bone.png', 'palestine_boycott_Buxton.png', 'palestine_boycott_Bvlgari.png', 'palestine_boycott_Cacharel.png', 'palestine_boycott_Cailler.png', 'palestine_boycott_Carita.png', 'palestine_boycott_Carnation.png', 'palestine_boycott_Carrefour.png', 'palestine_boycott_Cascade.png', 'palestine_boycott_Cat_Chow.png', 'palestine_boycott_Cerelac.png', 'palestine_boycott_Céline.png', 'palestine_boycott_Champagne_Krug.png', 'palestine_boycott_Chanel.png', 'palestine_boycott_Charmin.png', 'palestine_boycott_Cheer.png', 'palestine_boycott_Cheerios.png', 'palestine_boycott_Chef.png', 'palestine_boycott_Chevron.png', 'palestine_boycott_Chocapic.png', 'palestine_boycott_Christian_Dior.png', 'palestine_boycott_Christina_Cosmetics.png', 'palestine_boycott_Cini_Minis.png', 'palestine_boycott_Clairol_Professional.png', 'palestine_boycott_Clarisonic.png', 'palestine_boycott_Clean_&_Clear.png', 'palestine_boycott_Clearblue.png', 'palestine_boycott_Clinique.png', 'palestine_boycott_Coca_Cola.png', 'palestine_boycott_Coffee-Mate.png', 'palestine_boycott_Comet.png', 'palestine_boycott_Compleat.png', 'palestine_boycott_Conservative_party.png', 'palestine_boycott_Contrex.png', 'palestine_boycott_Corn_Flakes.png', 'palestine_boycott_Cortaid.png', 'palestine_boycott_Costa_Coffee.png', 'palestine_boycott_CoverGirl.png', 'palestine_boycott_Crest.png', 'palestine_boycott_Darphin_Paris.png', 'palestine_boycott_Dash.png', 'palestine_boycott_Dawn.png', 'palestine_boycott_Daz.png', 'palestine_boycott_DECIEM.png', 'palestine_boycott_Decleor.png', 'palestine_boycott_Dell.png', 'palestine_boycott_Dentalife.png', 'palestine_boycott_DFS_Group.png', 'palestine_boycott_Diesel.png', 'palestine_boycott_Diet_Coke.png', 'palestine_boycott_DiGiorno.png', 'palestine_boycott_Disney.png', 'palestine_boycott_Dodot.png', 'palestine_boycott_Dog_Chow.png', 'palestine_boycott_Dolce_&_Gabbana.png', 'palestine_boycott_Dominos.png', 'palestine_boycott_Dom_Pérignon.png', 'palestine_boycott_Doritos.png', 'palestine_boycott_Dove.png', 'palestine_boycott_Downy.png', 'palestine_boycott_Dr(1).png', 'palestine_boycott_Dr.png', 'palestine_boycott_Dreft_Laundry.png', 'palestine_boycott_Drumstick.png', 'palestine_boycott_Dr_Pepper.png', 'palestine_boycott_Duracell.png', 'palestine_boycott_Editions_de_Parfums_Frédéric_Malle.png', 'palestine_boycott_Era.png', 'palestine_boycott_Erikli.png', 'palestine_boycott_Essentia.png', 'palestine_boycott_Essie.png', 'palestine_boycott_Estée_Lauder.png', 'palestine_boycott_Extrême.png' , 'palestine_boycott_Fab.png', 'palestine_boycott_Fairy.png', 'palestine_boycott_Fancy_Feast.png', 'palestine_boycott_Febreeze.png', 'palestine_boycott_Felix.png', 'palestine_boycott_Fendi.png', 'palestine_boycott_Fenty_Beauty_by_Rihanna.png', 'palestine_boycott_Fiat_Chrysler.png', 'palestine_boycott_Fitness.png', 'palestine_boycott_Fiverr.png', 'palestine_boycott_Ford.png', 'palestine_boycott_Friskies.png', 'palestine_boycott_Fusion.png', 'palestine_boycott_Gain.png', 'palestine_boycott_Garden_Gourmet.png', 'palestine_boycott_Garden_of_Life.png', 'palestine_boycott_Garnier.png', 'palestine_boycott_Garoto.png', 'palestine_boycott_Gerber.png', 'palestine_boycott_Gillette.png', 'palestine_boycott_Giorgio_Armani_Beauty.png', 'palestine_boycott_Givenchy.png', 'palestine_boycott_Glaceau_Smartwater.png', 'palestine_boycott_GLAMGLOW.png', 'palestine_boycott_Goldman_Sachs.png', 'palestine_boycott_Google.png', 'palestine_boycott_Gourmet.png', 'palestine_boycott_Groupe_Vendome.png', 'palestine_boycott_Guerlain.png', 'palestine_boycott_Guy_Laroche.png', 'palestine_boycott_Häagen-Dazs.png', 'palestine_boycott_Head_&_Shoulders.png', 'palestine_boycott_Helena_Rubinstein.png', "palestine_boycott_Hellman's.png", 'palestine_boycott_Hennessy.png', 'palestine_boycott_HENNIEZ.png', 'palestine_boycott_Herbal_Essences.png', 'palestine_boycott_Hépar.png', 'palestine_boycott_Honda.png', 'palestine_boycott_Hot_Pockets.png', 'palestine_boycott_HP_(Hewlett_Packard)\xa0.png',, 'palestine_boycott_HSBC.png', 'palestine_boycott_Hsu_Fu_Chi.png', 'palestine_boycott_Hublot.png', 'palestine_boycott_Hyundai.png', 'palestine_boycott_Immodium.png', 'palestine_boycott_Impact.png', 'palestine_boycott_Intel.png', 'palestine_boycott_Ivory.png', 'palestine_boycott_JCB.png', 'palestine_boycott_Jeep.png', 'palestine_boycott_Johnson_&_Johnson.png', 'palestine_boycott_Joy.png', 'palestine_boycott_Jo_Malone_London.png', 'palestine_boycott_Kenzo.png', 'palestine_boycott_Kerastase.png', 'palestine_boycott_KFC.png', 'palestine_boycott_Kiehl’s.png', 'palestine_boycott_Kilian_Paris.png', 'palestine_boycott_KitKat.png', 'palestine_boycott_KitKat_Cereal.png', 'palestine_boycott_Koko_Krunch.png', 'palestine_boycott_KPMG.png', 'palestine_boycott_Krispy_Kreme.png', 'palestine_boycott_Labour_party.png', 'palestine_boycott_Lab_Series.png', 'palestine_boycott_Lactaid.png', 'palestine_boycott_Lancome.png', 'palestine_boycott_Lavido.png', "palestine_boycott_Lay's.png", 'palestine_boycott_La_Laitière.png', 'palestine_boycott_La_Mer.png', 'palestine_boycott_La_Roche-Posay.png', 'palestine_boycott_La_Vie.png', 'palestine_boycott_Lean_Cuisine.png', 'palestine_boycott_Levissima.png', 'palestine_boycott_Le_Bon_Marché.png', 'palestine_boycott_Le_Labo.png', 'palestine_boycott_Lidl.png', 'palestine_boycott_Life_Cuisine.png', "palestine_boycott_Lily's_Kitchen.png", 'palestine_boycott_Lion_Cereals.png', 'palestine_boycott_Lipton.png', 'palestine_boycott_Lipton_Iced_Tea.png', 'palestine_boycott_Listerine.png', 'palestine_boycott_Lloyds_Bank.png', 'palestine_boycott_Lockheed_Martin.png', 'palestine_boycott_Loewe.png', 'palestine_boycott_Loro_Piana.png', 'palestine_boycott_Louis_Vuitton.png', 'palestine_boycott_Lubriderm.png', 'palestine_boycott_Luvs.png', 'palestine_boycott_LVMH.png', 'palestine_boycott_L’Oreal.png', 'palestine_boycott_L’Oreal_Paris.png', 'palestine_boycott_L’Oreal_Professionnel.png', 'palestine_boycott_M&S.png', 'palestine_boycott_MAC_Cosmetics.png', 'palestine_boycott_Maggi.png', 'palestine_boycott_Maggi_Professional.png', 'palestine_boycott_Magnum_Ice_Creams.png', 'palestine_boycott_Maison_Margiela_Fragrances.png', 'palestine_boycott_Maxibon.png', 'palestine_boycott_Max_Factor.png', 'palestine_boycott_Maybelline.png', 'palestine_boycott_McDonalds.png', 'palestine_boycott_Merrick.png', 'palestine_boycott_Meta.png', 'palestine_boycott_Milkybar.png', 'palestine_boycott_Milo.png', "palestine_boycott_Minor's.png", 'palestine_boycott_Mizani.png', 'palestine_boycott_Moët_&_Chandon.png', 'palestine_boycott_Monday.png', 'palestine_boycott_Motorola.png', 'palestine_boycott_Motrin.png', 'palestine_boycott_Moynat.png', 'palestine_boycott_Mövenpick.png', 'palestine_boycott_Mr(1).png', 'palestine_boycott_Mr.png', 'palestine_boycott_Munch.png', 'palestine_boycott_Mylanta.png', 'palestine_boycott_Naked_Juice.png', "palestine_boycott_Nature's_Bounty.png", 'palestine_boycott_Naturella.png', 'palestine_boycott_NaturNes.png', 'palestine_boycott_Nałęczowianka.png', 'palestine_boycott_Neosporin.png', 'palestine_boycott_Nescafé.png', 'palestine_boycott_Nescafé_Dolce_Gusto.png', 'palestine_boycott_Nescafé_Ready_to_Drink.png', 'palestine_boycott_Nespresso.png', 'palestine_boycott_Nesquik.png', 'palestine_boycott_Nesquik_Cereal.png', 'palestine_boycott_Nestea.png', 'palestine_boycott_Nestle.png', 'palestine_boycott_Nestlé_Cui_Cui_Shark.png', "palestine_boycott_Nestlé_Les_Recettes_de_l'Atelier.png", 'palestine_boycott_Nestlé_Pure_Life.png', 'palestine_boycott_Neutrogena.png', 'palestine_boycott_Nice_‘n_Easy.png', 'palestine_boycott_Nicorette.png', 'palestine_boycott_Nido.png', 'palestine_boycott_NYX_Professional_Makeup.png', 'palestine_boycott_Oasis.png', 'palestine_boycott_Olay.png', 'palestine_boycott_Old_Spice.png', 'palestine_boycott_Oral-B.png', 'palestine_boycott_Origins.png', 'palestine_boycott_Orion.png', 'palestine_boycott_Paloma_Picasso.png', 'palestine_boycott_Pampers.png', 'palestine_boycott_Pantene.png', "palestine_boycott_Papa_John's.png", 'palestine_boycott_Parfums_Christian_Dior.png', 'palestine_boycott_Paypal.png', 'palestine_boycott_Pepcid.png', 'palestine_boycott_Pepsi.png', 'palestine_boycott_Peptamen.png', 'palestine_boycott_Perrier.png', 'palestine_boycott_Persona.png', 'palestine_boycott_Pizza_Hut.png', 'palestine_boycott_Popeyes.png', 'palestine_boycott_Pret_A_Manger.png', 'palestine_boycott_Procter_&_Gamble.png', 'palestine_boycott_Proenza_Schouler.png', 'palestine_boycott_Pro_Plan_Veterinary_Diets.png', 'palestine_boycott_Puffs.png', 'palestine_boycott_Puma.png', 'palestine_boycott_Pureology_Colour_Care.png', 'palestine_boycott_PURINA.png', 'palestine_boycott_PURINA_ONE.png', 'palestine_boycott_PURINA_Pro_Plan.png', 'palestine_boycott_Quality_Street.png', 'palestine_boycott_Ralph_Lauren_Fragrances.png', 'palestine_boycott_Redken.png', 'palestine_boycott_Rembrandt.png', 'palestine_boycott_Resource.png', 'palestine_boycott_Rimowa_GmbH.png', 'palestine_boycott_Roc.png', 'palestine_boycott_Roger&Gallet.png', 'palestine_boycott_S.png', 'palestine_boycott_Sabra.png', 'palestine_boycott_Sanoflore.png', 'palestine_boycott_Scope.png', 'palestine_boycott_Seacret.png', 'palestine_boycott_Secret.png', 'palestine_boycott_Sephora.png', 'palestine_boycott_Seven_Seas.png', 'palestine_boycott_Shredded_Wheat_Original.png', 'palestine_boycott_Shreddies.png', 'palestine_boycott_Shu_Uemura.png', 'palestine_boycott_Shu_Uemura_Art_of_Hair.png', 'palestine_boycott_Siemens.png', 'palestine_boycott_Skin_Ceuticals.png', 'palestine_boycott_Skoda.png', 'palestine_boycott_Smarties.png', 'palestine_boycott_Smashbox.png', 'palestine_boycott_SodaStream.png', 'palestine_boycott_Solgar.png', 'palestine_boycott_Sprite.png', 'palestine_boycott_Squarespace.png', 'palestine_boycott_Starbucks.png', 'palestine_boycott_Starbucks_Coffee_At_Home.png', "palestine_boycott_Stouffer's.png", 'palestine_boycott_Sudafed.png', 'palestine_boycott_Supercoat.png', 'palestine_boycott_Sweet_Earth.png', 'palestine_boycott_Swiffer.png', 'palestine_boycott_TAG_Heuer.png', 'palestine_boycott_Tampax.png', 'palestine_boycott_Terra_Canis.png', 'palestine_boycott_Tesco.png', 'palestine_boycott_Tesla.png', 'palestine_boycott_Teva.png', 'palestine_boycott_The_Body_Shop.png', 'palestine_boycott_Thomy.png', 'palestine_boycott_Tidy_Cats.png', 'palestine_boycott_Tiffany_&_Co.png', 'palestine_boycott_Toll_House.png', 'palestine_boycott_Tom_Ford_Beauty.png', 'palestine_boycott_Too_Faced.png', 'palestine_boycott_TripAdvisor.png', 'palestine_boycott_Tylenol.png', 'palestine_boycott_UBS.png', 'palestine_boycott_Unilever.png', 'palestine_boycott_Urban_Decay.png', 'palestine_boycott_Venus.png', 'palestine_boycott_Veuve_Clicquot.png', 'palestine_boycott_Vichy.png', 'palestine_boycott_Vicks.png', 'palestine_boycott_Victoria’s_Secret.png', 'palestine_boycott_Viktor_&_Rolf.png', 'palestine_boycott_Visine.png', 'palestine_boycott_Vitaflo.png', 'palestine_boycott_Vital_Proteins.png', 'palestine_boycott_Vittel.png', 'palestine_boycott_Volkswagen.png', 'palestine_boycott_Volvo.png', 'palestine_boycott_Walkers.png', 'palestine_boycott_Walls_Ice_Creams.png', 'palestine_boycott_Waze.png', 'palestine_boycott_Whisper.png', 'palestine_boycott_Wix.png', 'palestine_boycott_Yuesai.png', 'palestine_boycott_Yves_Saint_Laurent.png', 'palestine_boycott_Zara.png', 'palestine_boycott_Zyrtec.png'];
@@ -96,8 +76,6 @@
 
         const gridContainer = document.getElementById('imageGrid');
         const searchBar = document.getElementById('searchBar');
-        const scannerElement = document.getElementById('scanner');
-        const startScannerButton = document.getElementById('startScanner');
 
         function createGridItems(filenames) {
             gridContainer.innerHTML = ''; // Clear the current grid
@@ -125,50 +103,6 @@
 
         // Add event listener to search bar
         searchBar.addEventListener('input', filterImages);
-
-        // Barcode scanner setup
-        startScannerButton.addEventListener('click', () => {
-            scannerElement.style.display = 'block';
-            startScanner();
-        });
-
-        function startScanner() {
-            Quagga.init({
-                inputStream: {
-                    name: "Live",
-                    type: "LiveStream",
-                    target: scannerElement,
-                    constraints: {
-                        facingMode: "environment" // or user for front camera
-                    }
-                },
-                decoder: {
-                    readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader"]
-                }
-            }, (err) => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-                console.log("QuaggaJS initialized.");
-                Quagga.start();
-            });
-
-            Quagga.onDetected(data => {
-                const code = data.codeResult.code;
-                console.log("Barcode detected:", code);
-                alert(`Barcode detected: ${code}`);
-                Quagga.stop();
-                scannerElement.style.display = 'none';
-
-                // Check if the detected barcode is in the list
-                if (imageFilenames.includes(`${code}.png`)) {
-                    alert('This brand is on the boycott list.');
-                } else {
-                    alert('This brand is NOT on the boycott list.');
-                }
-            });
-        }
     </script>
 </body>
 </html>
